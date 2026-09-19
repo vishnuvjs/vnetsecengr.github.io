@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishnu Veerappan — Network & Security Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --surface2:  #1a2235;
+      --border:    #1e293b;
+      --accent:    #3b82f6;
+      --accent2:   #06b6d4;
+      --green:     #10b981;
+      --purple:    #8b5cf6;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --mono:      'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(10,14,26,0.85);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    h2.section-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: .5rem;
+    }
+    h3.section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .section-divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 5rem;
+      max-width: 1100px;
+    }
+    .hero-inner { width: 100%; }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent2);
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.3);
+      border-radius: 4px;
+      padding: .25rem .75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .hero-name span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: 8px;
+      font-size: .95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: .85rem; color: var(--muted); margin-top: .1rem; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p { color: #94a3b8; margin-bottom: 1rem; }
+    .timeline { margin-top: 1.5rem; }
+    .timeline-item {
+      display: flex; gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-left: .5rem;
+      border-left: 2px solid var(--border);
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: .5rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .timeline-content { padding-left: .75rem; }
+    .timeline-year { font-family: var(--mono); font-size: .8rem; color: var(--accent2); }
+    .timeline-title { font-size: .95rem; font-weight: 600; }
+    .timeline-sub { font-size: .85rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-icon {
+      font-size: 1.5rem;
+      margin-bottom: .75rem;
+    }
+    .skill-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: .75rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: .75rem;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      background: rgba(59,130,246,.1);
+      color: var(--accent2);
+      border: 1px solid rgba(59,130,246,.2);
+    }
+    .tag.green {
+      background: rgba(16,185,129,.1);
+      color: var(--green);
+      border-color: rgba(16,185,129,.25);
+    }
+    .tag.purple {
+      background: rgba(139,92,246,.1);
+      color: var(--purple);
+      border-color: rgba(139,92,246,.25);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex; flex-direction: column;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .project-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .project-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .project-card h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+    .project-card p {
+      color: #94a3b8;
+      font-size: .9rem;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+    /* ── JOURNEY ── */
+    .journey-phases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .phase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-card.active { border-color: var(--accent); }
+    .phase-badge {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--accent);
+      background: rgba(59,130,246,.12);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 4px;
+      padding: .15rem .5rem;
+      display: inline-block;
+      margin-bottom: .75rem;
+    }
+    .phase-badge.done { color: var(--green); background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.25); }
+    .phase-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+    .phase-card ul { list-style: none; padding: 0; }
+    .phase-card li {
+      font-size: .85rem;
+      color: var(--muted);
+      padding: .25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-card li:last-child { border: none; }
+    .phase-card li::before { content: '→ '; color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    #contact .section-divider { margin-left: auto; margin-right: auto; }
+    .contact-links {
+      display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer span { font-family: var(--mono); color: var(--accent); }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.25rem; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">VV</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner fade-in">
+    <div class="hero-tag">&#x1F4E1; Available for Network &amp; Security roles</div>
+    <h1 class="hero-name">Vishnu<br><span>Veerappan</span></h1>
+    <p class="hero-subtitle">
+      Senior Network Engineer specializing in service-provider &amp; data-center infrastructure —
+      building toward a network + security + cloud future.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-outline" href="#contact">Get in Touch</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Years in network engineering</div>
+      </div>
+      <div>
+        <div class="stat-num">7,300+</div>
+        <div class="stat-label">SSH sessions managed</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Vendors (Juniper · Cisco · Arista)</div>
+      </div>
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Internal tools shipped</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-label">About</h2>
+  <h3 class="section-title">Who I Am</h3>
+  <div class="section-divider"></div>
+
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        I'm a Senior Network Engineer at <strong>Viasat</strong>, working on the Frontline team
+        of a global network engineering organization. My day-to-day covers device operations,
+        upgrades, alert handling, and configuration changes across Juniper, Cisco, and Arista
+        equipment at service-provider and data-center scale.
+      </p>
+      <p>
+        Before Viasat, I worked across banking and healthcare B2B clients — building network
+        ops, troubleshooting, and firewall exposure with Checkpoint and Fortinet. I hold a
+        CCNA (2020) and am actively deepening my expertise in SP protocols, DC fabrics, and
+        network security engineering.
+      </p>
+      <p>
+        Beyond ops, I ship internal tooling: Python + Streamlit dashboards that turn raw
+        operational data (Jira, Confluence, NetBox, SSH) into actionable visibility for my team.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-year">2024 – Present</div>
+            <div class="timeline-title">Senior Network Engineer — Viasat</div>
+            <div class="timeline-sub">SP + DC infrastructure, Juniper/Cisco/Arista, internal tooling</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-year">2019 – 2024</div>
+            <div class="timeline-title">Network Engineer — Various (Banking / Healthcare)</div>
+            <div class="timeline-sub">Network ops, firewall administration, B2B client environments</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-title">CCNA Certified</div>
+            <div class="timeline-sub">Cisco Certified Network Associate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-card" style="margin-bottom:1.5rem;">
+        <div class="skill-icon">&#x1F4CD;</div>
+        <h4>Currently Focused On</h4>
+        <p style="color:#94a3b8;font-size:.9rem;margin-bottom:.75rem;">
+          Deep-diving SP protocols and DC fabrics as the foundation for a move into security engineering.
+        </p>
+        <div class="tags">
+          <span class="tag">BGP / OSPF / ISIS</span>
+          <span class="tag">VXLAN</span>
+          <span class="tag">EVPN</span>
+          <span class="tag">SR-MPLS</span>
+          <span class="tag">L3VPN / VRF</span>
+          <span class="tag">Spine-Leaf</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">&#x1F3AF;</div>
+        <h4>18-Month Goal</h4>
+        <p style="color:#94a3b8;font-size:.9rem;margin-bottom:.75rem;">
+          Become a well-rounded <strong>Network + Security + Cloud</strong> engineer
+          by early 2028, combining deep protocol knowledge with security engineering
+          and cloud-native skills.
+        </p>
+        <div class="tags">
+          <span class="tag green">Network Security</span>
+          <span class="tag green">AWS Networking</span>
+          <span class="tag green">Cloud Security</span>
+          <span class="tag purple">Security+</span>
+          <span class="tag purple">JNCIS-SP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-label">Skills</h2>
+  <h3 class="section-title">Technical Stack</h3>
+  <div class="section-divider"></div>
+
+  <div class="skills-grid fade-in">
+    <div class="skill-card">
+      <div class="skill-icon">&#x1F5A7;&#xFE0F;</div>
+      <h4>Routing &amp; Protocols</h4>
+      <div class="tags">
+        <span class="tag">BGP</span>
+        <span class="tag">OSPF</span>
+        <span class="tag">ISIS</span>
+        <span class="tag">MPLS</span>
+        <span class="tag">SR-MPLS</span>
+        <span class="tag">L3VPN</span>
+        <span class="tag">L2VPN</span>
+        <span class="tag">TE</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">&#x1F3D7;&#xFE0F;</div>
+      <h4>Data Center Fabric</h4>
+      <div class="tags">
+        <span class="tag">VXLAN</span>
+        <span class="tag">EVPN</span>
+        <span class="tag">MPLS-EVPN</span>
+        <span class="tag">Spine-Leaf</span>
+        <span class="tag">DC Fabric</span>
+        <span class="tag">HA Design</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">&#x1F4BB;</div>
+      <h4>Platforms &amp; Vendors</h4>
+      <div class="tags">
+        <span class="tag">Juniper JunOS</span>
+        <span class="tag">Cisco IOS XR</span>
+        <span class="tag">Cisco NX-OS</span>
+        <span class="tag">Arista EOS</span>
+        <span class="tag">Checkpoint</span>
+        <span class="tag">Fortinet</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">&#x1F6E1;&#xFE0F;</div>
+      <h4>Security</h4>
+      <div class="tags">
+        <span class="tag green">Firewall Policy</span>
+        <span class="tag green">Network Segmentation</span>
+        <span class="tag green">VRF Isolation</span>
+        <span class="tag green">ACLs</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">&#x1F40D;</div>
+      <h4>Automation &amp; Tooling</h4>
+      <div class="tags">
+        <span class="tag purple">Python</span>
+        <span class="tag purple">Streamlit</span>
+        <span class="tag purple">netmiko</span>
+        <span class="tag purple">REST APIs</span>
+        <span class="tag purple">Jira API</span>
+        <span class="tag purple">Confluence API</span>
+        <span class="tag purple">NetBox API</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">&#x2699;&#xFE0F;</div>
+      <h4>Ops &amp; Platforms</h4>
+      <div class="tags">
+        <span class="tag">SecureCRT</span>
+        <span class="tag">macOS / zsh</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">Git</span>
+        <span class="tag">NetBox DCIM</span>
+        <span class="tag">xMatters</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 class="section-label">Projects</h2>
+  <h3 class="section-title">Things I've Built</h3>
+  <div class="section-divider"></div>
+
+  <div class="projects-grid fade-in">
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(59,130,246,.12);">&#x1F4CA;</div>
+      </div>
+      <h4>Frontline Operations Dashboard</h4>
+      <p>
+        9-tab Streamlit dashboard aggregating team metrics from Jira, Confluence, xMatters,
+        and Slack into a single view. Replaced hours of manual report-pulling for a 6-engineer
+        global ops team with live, automated visibility.
+      </p>
+      <div class="project-stack">
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Jira API</span>
+        <span class="tag">Confluence API</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(6,182,212,.12);">&#x1F517;</div>
+      </div>
+      <h4>NetBox SSH Launcher</h4>
+      <p>
+        Streamlit app over the NetBox DCIM API with a filterable device table and per-row
+        one-click SSH — opens iTerm2 (Terminal.app fallback) via osascript. Cuts device
+        connection time from ~30s of manual lookup to a single click.
+      </p>
+      <div class="project-stack">
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">NetBox API</span>
+        <span class="tag">osascript</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(16,185,129,.12);">&#x1F6E1;&#xFE0F;</div>
+      </div>
+      <h4>Security Learning Tracker</h4>
+      <p>
+        Multi-page Streamlit app tracking a 4-phase career-transition curriculum: 68 study
+        topics, 48 hands-on labs, and 14 certifications. Includes progress logging, phase-by-phase
+        KPI bars, and session journaling with JSON persistence.
+      </p>
+      <div class="project-stack">
+        <span class="tag green">Python</span>
+        <span class="tag green">Streamlit</span>
+        <span class="tag green">JSON</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(245,158,11,.12);">&#x1F527;</div>
+      </div>
+      <h4>Device Upgrade Audit Tool</h4>
+      <p>
+        Automated SSH audit tool (netmiko) that pulls device lists from an Excel tracker,
+        SSHs into each non-completed device, reads the running software version, and
+        compares against target versions from an internal wiki — surfacing drift at a glance.
+      </p>
+      <div class="project-stack">
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">netmiko</span>
+        <span class="tag">openpyxl</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(139,92,246,.12);">&#x1F9E0;</div>
+      </div>
+      <h4>Claude Hub — AI Daily Hub</h4>
+      <p>
+        Personal Streamlit productivity hub with an AI-powered Q&amp;A log and daily task
+        tracker. Captures notable engineering insights per session and persists them as
+        searchable entries in JSON — a second brain for ops knowledge.
+      </p>
+      <div class="project-stack">
+        <span class="tag purple">Python</span>
+        <span class="tag purple">Streamlit</span>
+        <span class="tag purple">Claude API</span>
+        <span class="tag purple">JSON</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon" style="background:rgba(239,68,68,.12);">&#x1F5A5;&#xFE0F;</div>
+      </div>
+      <h4>SSH Session Manager</h4>
+      <p>
+        CLI fuzzy-finder launcher built around 7,300+ SecureCRT sessions. Parses the
+        session directory structure, presents a searchable fzf interface, and fires SSH
+        directly — turning a sprawling session library into a two-keystroke workflow.
+      </p>
+      <div class="project-stack">
+        <span class="tag">Bash / zsh</span>
+        <span class="tag">fzf</span>
+        <span class="tag">SecureCRT</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <h2 class="section-label">Journey</h2>
+  <h3 class="section-title">18-Month Roadmap</h3>
+  <div class="section-divider"></div>
+  <p style="color:#94a3b8;margin-bottom:2.5rem;max-width:620px;" class="fade-in">
+    A deliberate, phased path from deep SP/DC networking through security engineering
+    to cloud-native skills — anchored to real production work at each step.
+  </p>
+
+  <div class="journey-phases fade-in">
+    <div class="phase-card active">
+      <span class="phase-badge">Phase 1 · Active</span>
+      <h4>Deep Network Foundation</h4>
+      <ul>
+        <li>BGP (hardest first)</li>
+        <li>VRF / L3VPN</li>
+        <li>VXLAN + EVPN</li>
+        <li>SR-MPLS</li>
+        <li>JNCIS-SP / JNCIS-DC cert</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <span class="phase-badge">Phase 2 · Months 7–12</span>
+      <h4>Security Layer</h4>
+      <ul>
+        <li>Network security engineering</li>
+        <li>Firewall policy &amp; segmentation</li>
+        <li>Security+ certification</li>
+        <li>AWS VPCs, TGW, hybrid</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <span class="phase-badge">Phase 3 · Months 13–18</span>
+      <h4>Cloud + Integration</h4>
+      <ul>
+        <li>AWS Advanced Networking cert</li>
+        <li>Cloud security engineering</li>
+        <li>Network automation + Python</li>
+        <li>AI tooling integration</li>
+      </ul>
+    </div>
+
+    <div class="phase-card">
+      <span class="phase-badge done">Target</span>
+      <h4>Network + Security + Cloud</h4>
+      <ul>
+        <li>Holistic security posture</li>
+        <li>Cloud-native networking</li>
+        <li>Automation-first mindset</li>
+        <li>Senior Security Engineer role</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-label fade-in">Contact</h2>
+  <h3 class="section-title fade-in">Let's Connect</h3>
+  <div class="section-divider fade-in"></div>
+  <p style="color:#94a3b8;max-width:500px;margin:0 auto 1rem;" class="fade-in">
+    Open to conversations about network engineering, security, cloud infrastructure,
+    and building better ops tooling.
+  </p>
+
+  <div class="contact-links fade-in">
+    <a class="btn btn-primary" href="mailto:vveerappan@viasat.com">
+      ✉️ Email Me
+    </a>
+    <a class="btn btn-outline" href="https://linkedin.com/in/vishnu-veerappan" target="_blank" rel="noopener">
+      LinkedIn
+    </a>
+    <a class="btn btn-outline" href="https://github.com/vveerappan" target="_blank" rel="noopener">
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by <span>Vishnu Veerappan</span> · Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
