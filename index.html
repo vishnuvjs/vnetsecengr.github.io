@@ -5,21 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vishnu V — Network & Security Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:       #0a0e1a;
-      --surface:  #111827;
-      --surface2: #1a2235;
-      --border:   #1e293b;
-      --accent:   #3b82f6;
-      --accent2:  #06b6d4;
-      --green:    #10b981;
-      --purple:   #8b5cf6;
-      --amber:    #f59e0b;
-      --text:     #e2e8f0;
-      --muted:    #64748b;
-      --mono:     'JetBrains Mono', monospace;
+      --bg:         #060c18;
+      --bg2:        #0a1220;
+      --surface:    #0f1a2e;
+      --surface2:   #162035;
+      --border:     #1e3050;
+      --border2:    #243a5e;
+      --cyan:       #00d4ff;
+      --cyan-dim:   rgba(0,212,255,0.12);
+      --cyan-glow:  rgba(0,212,255,0.3);
+      --green:      #00ff88;
+      --green-dim:  rgba(0,255,136,0.1);
+      --purple:     #a855f7;
+      --purple-dim: rgba(168,85,247,0.12);
+      --amber:      #fbbf24;
+      --amber-dim:  rgba(251,191,36,0.1);
+      --red:        #f87171;
+      --text:       #e2eaf6;
+      --text2:      #94a3b8;
+      --muted:      #4a6080;
+      --mono:       'JetBrains Mono', monospace;
+      --sans:       'Outfit', sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,235 +36,410 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: var(--sans);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(10,14,26,0.88);
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      backdrop-filter: blur(20px) saturate(1.5);
+      background: rgba(6,12,24,0.82);
       border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
+      padding: 0 2.5rem;
+      height: 60px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo { font-family: var(--mono); font-size: 1.1rem; color: var(--accent); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-logo {
+      font-family: var(--mono); font-size: 1rem; font-weight: 600;
+      color: var(--cyan); text-decoration: none; letter-spacing: .05em;
+    }
+    .nav-logo span { color: var(--text2); }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a {
+      color: var(--text2); text-decoration: none; font-size: .85rem;
+      font-weight: 500; padding: .4rem .85rem; border-radius: 6px;
+      transition: color .2s, background .2s; letter-spacing: .02em;
+    }
+    .nav-links a:hover { color: var(--cyan); background: var(--cyan-dim); }
+    .nav-github {
+      font-family: var(--mono); font-size: .8rem; color: var(--cyan) !important;
+      border: 1px solid var(--border2) !important;
+      background: transparent !important;
+    }
+    .nav-github:hover { border-color: var(--cyan) !important; background: var(--cyan-dim) !important; }
 
     /* ── LAYOUT ── */
-    section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 7rem 0; }
 
-    h2.section-label {
-      font-family: var(--mono); font-size: .8rem; color: var(--accent);
-      text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem;
+    /* ── SECTION HEADER ── */
+    .sec-kicker {
+      font-family: var(--mono); font-size: .75rem; color: var(--cyan);
+      letter-spacing: .18em; text-transform: uppercase; margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .6rem;
     }
-    h3.section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
-    .section-divider {
-      width: 48px; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      border-radius: 2px; margin-bottom: 3rem;
+    .sec-kicker::before { content: '//'; color: var(--muted); }
+    .sec-title {
+      font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800;
+      margin-bottom: .75rem; letter-spacing: -.02em;
+    }
+    .sec-line {
+      width: 40px; height: 2px; margin-bottom: 3.5rem;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      border-radius: 2px;
     }
 
     /* ── HERO ── */
-    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; max-width: 1100px; }
-    .hero-tag {
-      display: inline-block; font-family: var(--mono); font-size: .85rem; color: var(--accent2);
-      background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.3);
-      border-radius: 4px; padding: .25rem .75rem; margin-bottom: 1.5rem;
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
     }
+    #hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: .45;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto; padding: 0 2rem;
+      padding-top: 4rem;
+    }
+    .hero-prompt {
+      font-family: var(--mono); font-size: .85rem;
+      color: var(--green); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .hero-prompt .cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: var(--green); animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
     .hero-name {
-      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700;
-      line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1rem;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; line-height: 1.0; letter-spacing: -.03em;
+      margin-bottom: .5rem;
     }
-    .hero-name span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    .hero-name .highlight {
+      background: linear-gradient(135deg, var(--cyan) 0%, #60a5fa 50%, var(--purple) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .hero-subtitle { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin-bottom: 2.5rem; }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-role {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 600;
+      color: var(--text2); margin-bottom: 1.5rem; letter-spacing: -.01em;
+    }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--text2); max-width: 580px;
+      margin-bottom: 2.5rem; line-height: 1.75;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 600; }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
     .btn {
       display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.5rem; border-radius: 8px; font-size: .95rem;
-      font-weight: 600; text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+      padding: .7rem 1.5rem; border-radius: 8px;
+      font-family: var(--sans); font-size: .9rem; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer;
+      border: none; letter-spacing: .01em;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
-    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .btn-linkedin { background: #0a66c2; color: #fff; }
-    .btn-linkedin:hover { background: #0858a8; transform: translateY(-1px); }
-    .btn-github { background: #24292e; color: #fff; }
-    .btn-github:hover { background: #1a1e22; transform: translateY(-1px); }
+    .btn-cyan {
+      background: var(--cyan); color: #060c18;
+    }
+    .btn-cyan:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 24px var(--cyan-glow); }
+    .btn-ghost {
+      background: transparent; border: 1px solid var(--border2); color: var(--text2);
+    }
+    .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+    .btn-li { background: #0a66c2; color: #fff; }
+    .btn-li:hover { background: #0957a8; transform: translateY(-2px); }
+    .btn-gh { background: #21262d; color: var(--text); border: 1px solid var(--border2); }
+    .btn-gh:hover { background: #30363d; transform: translateY(-2px); }
 
     .hero-stats {
       display: flex; gap: 3rem; flex-wrap: wrap;
-      margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      padding-top: 2.5rem; border-top: 1px solid var(--border);
     }
-    .stat-num {
-      font-size: 2rem; font-weight: 700; font-family: var(--mono);
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .stat-val {
+      font-family: var(--mono); font-size: 2rem; font-weight: 600;
+      color: var(--cyan); line-height: 1;
     }
-    .stat-label { font-size: .85rem; color: var(--muted); margin-top: .1rem; }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .3rem; letter-spacing: .03em; }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--mono); font-size: .78rem; color: var(--text2);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: .35rem .9rem; margin-bottom: 1.5rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px var(--green);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+    @keyframes pulse-green {
+      0%,100%{box-shadow:0 0 4px var(--green)} 50%{box-shadow:0 0 12px var(--green)}
+    }
 
     /* ── ABOUT ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .about-text p { color: #94a3b8; margin-bottom: 1rem; }
-    .timeline { margin-top: 1.5rem; }
-    .timeline-item {
-      display: flex; gap: 1rem; margin-bottom: 1.5rem;
-      padding-left: .5rem; border-left: 2px solid var(--border); position: relative;
+    #about { background: var(--bg); }
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--text2); margin-bottom: 1.1rem; font-size: .97rem; }
+    .about-text p strong { color: var(--text); }
+
+    .terminal-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
     }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -5px; top: .5rem;
-      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+    .terminal-topbar {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .65rem 1rem; background: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
-    .timeline-item.current::before { background: var(--green); box-shadow: 0 0 8px var(--green); }
-    .timeline-content { padding-left: .75rem; }
-    .timeline-year { font-family: var(--mono); font-size: .8rem; color: var(--accent2); }
-    .timeline-title { font-size: .95rem; font-weight: 600; }
-    .timeline-sub { font-size: .85rem; color: var(--muted); }
-    .timeline-bullets { margin-top: .4rem; padding-left: 1rem; }
-    .timeline-bullets li { font-size: .82rem; color: #64748b; margin-bottom: .2rem; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #28ca41; }
+    .terminal-title { font-family: var(--mono); font-size: .75rem; color: var(--muted); margin-left: auto; }
+    .terminal-body { padding: 1.25rem 1.5rem; font-family: var(--mono); font-size: .82rem; line-height: 2; }
+    .t-prompt { color: var(--green); }
+    .t-cmd { color: var(--cyan); }
+    .t-out { color: var(--text2); padding-left: 1rem; }
+    .t-key { color: var(--amber); }
+    .t-val { color: var(--text); }
+    .t-comment { color: var(--muted); }
 
     /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    #skills { background: var(--bg2); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
     .skill-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.5rem; transition: border-color .2s, transform .2s;
+      border-radius: 12px; padding: 1.4rem;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
     }
-    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .skill-icon { font-size: 1.5rem; margin-bottom: .75rem; }
-    .skill-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: .75rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .skill-card:hover {
+      border-color: var(--cyan); transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,212,255,0.08);
+    }
+    .skill-cat {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .skill-cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: .35rem; }
     .tag {
-      font-family: var(--mono); font-size: .72rem; padding: .2rem .6rem;
-      border-radius: 4px; background: rgba(59,130,246,.1); color: var(--accent2);
-      border: 1px solid rgba(59,130,246,.2);
+      font-family: var(--mono); font-size: .72rem; padding: .22rem .6rem;
+      border-radius: 4px; font-weight: 400;
     }
-    .tag.green { background: rgba(16,185,129,.1); color: var(--green); border-color: rgba(16,185,129,.25); }
-    .tag.purple { background: rgba(139,92,246,.1); color: var(--purple); border-color: rgba(139,92,246,.25); }
-    .tag.amber { background: rgba(245,158,11,.1); color: var(--amber); border-color: rgba(245,158,11,.25); }
+    .tag-cyan { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,.2); }
+    .tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,255,136,.2); }
+    .tag-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(168,85,247,.2); }
+    .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(251,191,36,.2); }
+    .tag-red { background: rgba(248,113,113,.08); color: var(--red); border: 1px solid rgba(248,113,113,.2); }
 
     /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+    #experience { background: var(--bg); }
+    .exp-timeline { position: relative; padding-left: 2rem; }
+    .exp-timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--cyan), var(--border), transparent);
+    }
+    .exp-item { position: relative; padding-bottom: 3rem; }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-node {
+      position: absolute; left: -2.35rem; top: .3rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid var(--cyan); background: var(--bg);
+      box-shadow: 0 0 0 3px rgba(0,212,255,.12);
+    }
+    .exp-item.current .exp-node {
+      background: var(--cyan); box-shadow: 0 0 0 4px rgba(0,212,255,.2), 0 0 12px var(--cyan);
+    }
     .exp-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.75rem;
+      border-radius: 12px; padding: 1.5rem 1.75rem;
       transition: border-color .2s;
     }
-    .exp-card:hover { border-color: var(--accent); }
-    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
+    .exp-item.current .exp-card { border-color: rgba(0,212,255,.3); }
+    .exp-card:hover { border-color: var(--border2); }
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
     .exp-role { font-size: 1.05rem; font-weight: 700; }
-    .exp-company { font-size: .9rem; color: var(--accent2); margin-top: .1rem; }
+    .exp-company { font-size: .9rem; color: var(--cyan); margin-top: .2rem; }
     .exp-period {
-      font-family: var(--mono); font-size: .8rem;
-      background: rgba(59,130,246,.1); color: var(--accent);
-      border: 1px solid rgba(59,130,246,.2); border-radius: 4px;
-      padding: .2rem .6rem; white-space: nowrap;
+      font-family: var(--mono); font-size: .75rem; color: var(--cyan);
+      background: var(--cyan-dim); border: 1px solid rgba(0,212,255,.2);
+      border-radius: 20px; padding: .2rem .75rem; white-space: nowrap; align-self: flex-start;
     }
-    .exp-bullets { list-style: none; padding: 0; margin-top: .75rem; }
+    .exp-bullets { list-style: none; padding: 0; }
     .exp-bullets li {
-      font-size: .88rem; color: #94a3b8; padding: .3rem 0;
-      border-bottom: 1px solid var(--border); display: flex; gap: .5rem;
+      font-size: .875rem; color: var(--text2); padding: .3rem 0;
+      border-bottom: 1px solid var(--border); display: flex; gap: .6rem; align-items: baseline;
     }
     .exp-bullets li:last-child { border: none; }
-    .exp-bullets li::before { content: '▸'; color: var(--accent); flex-shrink: 0; }
+    .exp-bullets li::before { content: '▸'; color: var(--cyan); flex-shrink: 0; font-size: .75rem; }
 
     /* ── PROJECTS ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    #projects { background: var(--bg2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
     .project-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column;
-      transition: border-color .2s, transform .2s;
+      border-radius: 12px; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
     }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .project-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
-    .project-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: .4rem; }
-    .project-card p { color: #94a3b8; font-size: .9rem; flex: 1; margin-bottom: 1.25rem; }
+    .project-card:hover {
+      border-color: var(--cyan); transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,212,255,.07);
+    }
+    .project-topbar {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .65rem 1rem; background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .project-path {
+      font-family: var(--mono); font-size: .72rem; color: var(--muted);
+      margin-left: .25rem;
+    }
+    .project-path span { color: var(--cyan); }
+    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-icon { font-size: 1.6rem; margin-bottom: .75rem; }
+    .project-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+    .project-card p { color: var(--text2); font-size: .875rem; line-height: 1.65; flex: 1; margin-bottom: 1.25rem; }
     .project-stack { display: flex; flex-wrap: wrap; gap: .35rem; }
 
     /* ── CERTIFICATIONS ── */
-    .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    #certifications { background: var(--bg); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
     .cert-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 1.25rem 1.5rem;
       display: flex; align-items: center; gap: 1rem;
-      transition: border-color .2s, transform .2s;
+      transition: border-color .25s, transform .25s;
     }
-    .cert-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+    .cert-card:hover { border-color: var(--amber); transform: translateY(-3px); box-shadow: 0 8px 24px var(--amber-dim); }
     .cert-badge {
-      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; background: rgba(245,158,11,.1);
+      font-size: 1.3rem; background: var(--amber-dim);
+      border: 1px solid rgba(251,191,36,.2);
     }
-    .cert-name { font-size: .9rem; font-weight: 600; }
-    .cert-issuer { font-size: .8rem; color: var(--muted); }
+    .cert-name { font-size: .92rem; font-weight: 700; }
+    .cert-issuer { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
 
     /* ── EDUCATION ── */
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    #education { background: var(--bg2); }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
     .edu-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 1.25rem 1.5rem;
       display: flex; align-items: center; gap: 1rem;
-      transition: border-color .2s;
+      transition: border-color .25s;
     }
     .edu-card:hover { border-color: var(--purple); }
     .edu-icon {
-      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; background: rgba(139,92,246,.1);
+      font-size: 1.3rem; background: var(--purple-dim);
+      border: 1px solid rgba(168,85,247,.2);
     }
-    .edu-degree { font-size: .9rem; font-weight: 600; }
-    .edu-school { font-size: .8rem; color: var(--muted); }
-    .edu-year { font-family: var(--mono); font-size: .75rem; color: var(--purple); margin-top: .15rem; }
+    .edu-degree { font-size: .92rem; font-weight: 700; }
+    .edu-school { font-size: .78rem; color: var(--muted); }
+    .edu-year { font-family: var(--mono); font-size: .73rem; color: var(--purple); margin-top: .2rem; }
 
     /* ── JOURNEY ── */
-    .journey-phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    #journey { background: var(--bg); }
+    .journey-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .journey-connector {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 2rem; padding: 0 1rem;
+    }
+    .jc-node {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid var(--cyan);
+      background: var(--bg);
+    }
+    .jc-node.active { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .jc-node.done { background: var(--green); border-color: var(--green); box-shadow: 0 0 10px var(--green); }
+    .jc-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--cyan), var(--border)); }
+
+    .phase-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
     .phase-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 1.5rem;
+      transition: border-color .25s, transform .25s;
     }
-    .phase-card.active { border-color: var(--accent); }
-    .phase-badge {
-      font-family: var(--mono); font-size: .75rem; color: var(--accent);
-      background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.25);
-      border-radius: 4px; padding: .15rem .5rem; display: inline-block; margin-bottom: .75rem;
+    .phase-card:hover { transform: translateY(-3px); }
+    .phase-card.active { border-color: rgba(0,212,255,.4); box-shadow: 0 0 24px rgba(0,212,255,.06); }
+    .phase-pill {
+      display: inline-block; font-family: var(--mono); font-size: .7rem;
+      padding: .18rem .6rem; border-radius: 20px; margin-bottom: .85rem;
     }
-    .phase-badge.done { color: var(--green); background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.25); }
-    .phase-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+    .pill-active { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,.3); }
+    .pill-next { background: var(--surface2); color: var(--text2); border: 1px solid var(--border2); }
+    .pill-done { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,255,136,.3); }
+    .phase-card h4 { font-size: .97rem; font-weight: 700; margin-bottom: .65rem; }
     .phase-card ul { list-style: none; padding: 0; }
-    .phase-card li { font-size: .85rem; color: var(--muted); padding: .25rem 0; border-bottom: 1px solid var(--border); }
+    .phase-card li {
+      font-size: .82rem; color: var(--text2); padding: .28rem 0;
+      border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: .45rem;
+    }
     .phase-card li:last-child { border: none; }
-    .phase-card li::before { content: '→ '; color: var(--accent); }
+    .phase-card li::before { content: '→'; color: var(--cyan); font-size: .75rem; flex-shrink: 0; }
 
     /* ── CONTACT ── */
-    #contact { text-align: center; }
-    #contact .section-divider { margin-left: auto; margin-right: auto; }
-    .contact-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    #contact { background: var(--bg2); text-align: center; }
+    .contact-inner { max-width: 540px; margin: 0 auto; }
+    .contact-inner .sec-kicker { justify-content: center; }
+    .contact-inner .sec-line { margin-left: auto; margin-right: auto; }
+    #contact p { color: var(--text2); margin-bottom: 2rem; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .contact-email {
+      font-family: var(--mono); font-size: .85rem;
+      color: var(--text2); margin-top: 1.5rem;
+      padding: .65rem 1.5rem; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px;
+      display: inline-block;
+    }
+    .contact-email a { color: var(--cyan); text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
 
     /* ── FOOTER ── */
     footer {
-      text-align: center; padding: 2rem; color: var(--muted);
-      font-size: .85rem; border-top: 1px solid var(--border);
+      text-align: center; padding: 1.75rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono); font-size: .75rem; color: var(--muted);
     }
-    footer span { font-family: var(--mono); color: var(--accent); }
+    footer span { color: var(--cyan); }
 
-    /* ── FADE ── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: .08s; }
+    .fade-up:nth-child(3) { transition-delay: .16s; }
+    .fade-up:nth-child(4) { transition-delay: .24s; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      section { padding: 4rem 1.25rem; }
-      .hero-stats { gap: 1.5rem; }
-      .exp-header { flex-direction: column; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 4.5rem 0; }
+      .container { padding: 0 1.25rem; }
+      .hero-content { padding: 0 1.25rem; padding-top: 4.5rem; }
+      .hero-stats { gap: 2rem; }
+      .phase-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .phase-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -263,116 +447,123 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#hero">VV</a>
+  <a class="nav-logo" href="#hero">vishnu<span>@net</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certifications">Certs</a></li>
-    <li><a href="#journey">Journey</a></li>
+    <li><a href="#journey">Roadmap</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://github.com/vishnuvjs" target="_blank" rel="noopener">GitHub ↗</a></li>
+    <li><a class="nav-github" href="https://github.com/vishnuvjs" target="_blank" rel="noopener">↗ GitHub</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div style="width:100%" class="fade-in">
-    <div class="hero-tag">&#x1F4E1; Network + Security + Cloud Engineer — In Progress</div>
-    <h1 class="hero-name">Vishnu V<br><span>Network Engineer</span></h1>
-    <p class="hero-subtitle">
-      Cisco-certified professional with 6.3 years of experience in networking and network security —
-      designing, deploying, and operating SP &amp; DC infrastructure at scale, with hands-on
-      Juniper, Cisco, Arista, and firewall expertise. Actively building toward a
-      <strong style="color:var(--text)">Network + Security + Cloud</strong> engineering role.
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      Available — Bangalore, India &nbsp;·&nbsp; Open to Network + Security roles
+    </div>
+
+    <div class="hero-prompt">
+      <span>$</span> <span id="typed-text"></span><span class="cursor"></span>
+    </div>
+
+    <h1 class="hero-name">
+      Vishnu V<br>
+      <span class="highlight">Network Engineer</span>
+    </h1>
+
+    <p class="hero-role">SP &amp; DC Infrastructure · Security · Cloud</p>
+
+    <p class="hero-desc">
+      Cisco-certified professional with <strong>6.3 years</strong> of experience in networking and
+      network security. Hands-on with Juniper, Cisco, Arista, Palo Alto, and FortiGate at service-provider
+      and data-center scale. Actively building toward a
+      <strong>Network + Security + Cloud</strong> engineering role.
     </p>
+
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
-      <a class="btn btn-linkedin" href="https://linkedin.com/in/vishnu-v-a30842158" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-github" href="https://github.com/vishnuvjs" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-outline" href="#contact">Contact Me</a>
+      <a class="btn btn-cyan" href="#projects">View Projects</a>
+      <a class="btn btn-li" href="https://linkedin.com/in/vishnu-v-a30842158" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-gh" href="https://github.com/vishnuvjs" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="#contact">Contact</a>
     </div>
 
     <div class="hero-stats">
-      <div>
-        <div class="stat-num">6.3</div>
-        <div class="stat-label">Years of experience</div>
-      </div>
-      <div>
-        <div class="stat-num">4</div>
-        <div class="stat-label">Certifications held</div>
-      </div>
-      <div>
-        <div class="stat-num">3</div>
-        <div class="stat-label">Vendors (Juniper · Cisco · Arista)</div>
-      </div>
-      <div>
-        <div class="stat-num">6+</div>
-        <div class="stat-label">Internal tools shipped</div>
-      </div>
+      <div><div class="stat-val">6.3</div><div class="stat-label">Years experience</div></div>
+      <div><div class="stat-val">4</div><div class="stat-label">Certifications</div></div>
+      <div><div class="stat-val">3</div><div class="stat-label">Vendors mastered</div></div>
+      <div><div class="stat-val">6+</div><div class="stat-label">Tools built</div></div>
     </div>
+
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <h2 class="section-label">About</h2>
-  <h3 class="section-title">Who I Am</h3>
-  <div class="section-divider"></div>
+  <div class="container">
+    <div class="sec-kicker">About</div>
+    <h3 class="sec-title">Who I Am</h3>
+    <div class="sec-line"></div>
 
-  <div class="about-grid fade-in">
-    <div class="about-text">
-      <p>
-        I'm a Cisco-certified Network Engineer with <strong>6.3 years</strong> of hands-on
-        experience in networking and network security. I specialize in configuring and
-        troubleshooting L2/L3 networks, with deep expertise across Juniper, Cisco, and Arista
-        platforms — and firewall experience spanning Palo Alto, FortiGate, and Checkpoint.
-      </p>
-      <p>
-        Currently at <strong>Terralogic Software Solutions</strong>, leading a team of six engineers
-        managing production SP and data-center infrastructure. My work spans VXLAN/EVPN overlay
-        design, BGP/OSPF troubleshooting, CGNAT, OOB management, and Splunk-driven network
-        monitoring — with direct Vendor TAC engagement across Cisco, Juniper, and Arista.
-      </p>
-      <p>
-        Beyond ops, I build internal tooling: Python + Streamlit dashboards that turn raw
-        operational data (Jira, Confluence, NetBox, SSH) into automated visibility for my team.
-        I also leverage AI-assisted workflows and MCP-based tool integrations daily.
-      </p>
-      <p>
-        I'm on a deliberate 18-month path toward a <strong>Network + Security + Cloud</strong>
-        engineering role — deepening SP/DC protocol knowledge first, then layering in security
-        engineering and cloud-native skills.
-      </p>
-    </div>
-
-    <div>
-      <div class="skill-card" style="margin-bottom:1.5rem;">
-        <div class="skill-icon">&#x1F4CD;</div>
-        <h4>Current Focus</h4>
-        <p style="color:#94a3b8;font-size:.88rem;margin-bottom:.75rem;">
-          Deepening SP protocol mastery and DC fabric design as the foundation for security engineering.
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>
+          I'm a <strong>Senior Network Engineer</strong> currently at Terralogic Software Solutions,
+          leading a team of six engineers on global SP and data-center infrastructure. My work spans
+          VXLAN/EVPN overlay design, BGP/OSPF troubleshooting, CGNAT, OOB management, Splunk-driven
+          monitoring, and FortiGate firewall operations — with direct Vendor TAC engagement across
+          Cisco, Juniper, and Arista.
         </p>
-        <div class="tags">
-          <span class="tag">BGP</span><span class="tag">SR-MPLS</span>
-          <span class="tag">VXLAN</span><span class="tag">EVPN</span>
-          <span class="tag">L3VPN / VRF</span><span class="tag">Spine-Leaf</span>
-        </div>
+        <p>
+          Before that, I've worked across Bahrain (Epsilon InfoTech), Bangalore (FIS Global, Ahalia Group),
+          gaining hands-on experience in Checkpoint firewall HA clusters, DC-to-DR switchovers for a global
+          financial corporation, and FortiGate SD-WAN in healthcare environments.
+        </p>
+        <p>
+          Beyond ops, I build internal tooling — Python and Streamlit dashboards that pull from Jira,
+          Confluence, NetBox, and raw SSH output to give my team real-time operational visibility. I also
+          integrate AI workflows and MCP-based tool automation into my daily engineering practice.
+        </p>
+        <p>
+          I'm on a deliberate 18-month path toward <strong>Network + Security + Cloud</strong> —
+          deepening SP/DC protocol knowledge first, then layering security engineering and cloud-native skills
+          on top.
+        </p>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">&#x1F3AF;</div>
-        <h4>18-Month Goal</h4>
-        <p style="color:#94a3b8;font-size:.88rem;margin-bottom:.75rem;">
-          Network + Security + Cloud engineer — combining deep protocol knowledge with
-          security engineering and cloud-native skills by early 2028.
-        </p>
-        <div class="tags">
-          <span class="tag green">Network Security</span>
-          <span class="tag green">AWS Networking</span>
-          <span class="tag green">Cloud Security</span>
-          <span class="tag purple">JNCIS-SP</span>
-          <span class="tag purple">Security+</span>
+
+      <div class="fade-up">
+        <div class="terminal-box">
+          <div class="terminal-topbar">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+            <div class="terminal-title">vishnu@profile ~ $</div>
+          </div>
+          <div class="terminal-body">
+            <div><span class="t-prompt">$</span> <span class="t-cmd">cat profile.json</span></div>
+            <div class="t-out">{</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-val">"Vishnu V"</span>,</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"Network Engineer"</span>,</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"experience"</span>: <span class="t-val">"6.3 years"</span>,</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-val">"Bangalore, India"</span>,</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"vendors"</span>: [</div>
+            <div class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Juniper"</span>, <span class="t-val">"Cisco"</span>, <span class="t-val">"Arista"</span></div>
+            <div class="t-out">&nbsp;&nbsp;],</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"firewalls"</span>: [</div>
+            <div class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Palo Alto"</span>, <span class="t-val">"FortiGate"</span>, <span class="t-val">"Checkpoint"</span></div>
+            <div class="t-out">&nbsp;&nbsp;],</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"goal"</span>: <span class="t-val">"Net+Sec+Cloud Eng"</span>,</div>
+            <div class="t-out">&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-val">"available"</span></div>
+            <div class="t-out">}</div>
+            <div style="margin-top:.5rem"><span class="t-prompt">$</span> <span class="cursor" style="width:8px;height:1em;display:inline-block;background:var(--green);animation:blink 1s step-end infinite;"></span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -381,84 +572,101 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <h2 class="section-label">Skills</h2>
-  <h3 class="section-title">Technical Stack</h3>
-  <div class="section-divider"></div>
+  <div class="container">
+    <div class="sec-kicker">Skills</div>
+    <h3 class="sec-title">Technical Stack</h3>
+    <div class="sec-line"></div>
 
-  <div class="skills-grid fade-in">
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F5A7;&#xFE0F;</div>
-      <h4>Routing &amp; Switching</h4>
-      <div class="tags">
-        <span class="tag">BGP</span><span class="tag">OSPF</span><span class="tag">EIGRP</span>
-        <span class="tag">IS-IS</span><span class="tag">BFD</span><span class="tag">VRF</span>
-        <span class="tag">PBR</span><span class="tag">STP</span><span class="tag">HSRP</span>
-        <span class="tag">VRRP</span><span class="tag">VTP</span>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--cyan)"></div>
+          <span style="color:var(--cyan)">Routing &amp; Switching</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-cyan">BGP</span><span class="tag tag-cyan">OSPF</span>
+          <span class="tag tag-cyan">EIGRP</span><span class="tag tag-cyan">IS-IS</span>
+          <span class="tag tag-cyan">BFD</span><span class="tag tag-cyan">VRF</span>
+          <span class="tag tag-cyan">PBR</span><span class="tag tag-cyan">STP</span>
+          <span class="tag tag-cyan">HSRP</span><span class="tag tag-cyan">VRRP</span>
+          <span class="tag tag-cyan">VTP</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F3D7;&#xFE0F;</div>
-      <h4>Data Center &amp; Overlay</h4>
-      <div class="tags">
-        <span class="tag">VXLAN</span><span class="tag">EVPN</span><span class="tag">MP-BGP</span>
-        <span class="tag">MLAG</span><span class="tag">NX-OS</span><span class="tag">Arista EOS</span>
-        <span class="tag">Junos</span><span class="tag">IOS-XR</span><span class="tag">Arista VRF</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--purple)"></div>
+          <span style="color:var(--purple)">Data Center &amp; Overlay</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-purple">VXLAN</span><span class="tag tag-purple">EVPN</span>
+          <span class="tag tag-purple">MP-BGP</span><span class="tag tag-purple">MLAG</span>
+          <span class="tag tag-purple">NX-OS</span><span class="tag tag-purple">Arista EOS</span>
+          <span class="tag tag-purple">Junos</span><span class="tag tag-purple">IOS-XR</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F6E1;&#xFE0F;</div>
-      <h4>Security &amp; Firewalls</h4>
-      <div class="tags">
-        <span class="tag green">Palo Alto</span><span class="tag green">FortiGate</span>
-        <span class="tag green">Checkpoint</span><span class="tag green">IPsec VPN</span>
-        <span class="tag green">SSL VPN</span><span class="tag green">SD-WAN</span>
-        <span class="tag green">NAT/PAT</span><span class="tag green">VDOM</span>
-        <span class="tag green">DLP</span><span class="tag green">NAC</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--green)"></div>
+          <span style="color:var(--green)">Security &amp; Firewalls</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-green">Palo Alto</span><span class="tag tag-green">FortiGate</span>
+          <span class="tag tag-green">Checkpoint</span><span class="tag tag-green">IPsec VPN</span>
+          <span class="tag tag-green">SSL VPN</span><span class="tag tag-green">SD-WAN</span>
+          <span class="tag tag-green">NAT/PAT</span><span class="tag tag-green">VDOM</span>
+          <span class="tag tag-green">DLP</span><span class="tag tag-green">NAC</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F310;</div>
-      <h4>WAN &amp; Service Provider</h4>
-      <div class="tags">
-        <span class="tag">MPLS</span><span class="tag">SR-MPLS</span>
-        <span class="tag">CGNAT</span><span class="tag">OOB Networking</span>
-        <span class="tag">Console Servers</span><span class="tag">LAN/WAN</span>
-        <span class="tag">TCP/IP</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--cyan)"></div>
+          <span style="color:var(--cyan)">WAN &amp; Service Provider</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-cyan">MPLS</span><span class="tag tag-cyan">SR-MPLS</span>
+          <span class="tag tag-cyan">CGNAT</span><span class="tag tag-cyan">OOB Networking</span>
+          <span class="tag tag-cyan">Console Servers</span><span class="tag tag-cyan">TCP/IP</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F4CA;</div>
-      <h4>Monitoring &amp; Tools</h4>
-      <div class="tags">
-        <span class="tag amber">Splunk Enterprise</span><span class="tag amber">Wireshark</span>
-        <span class="tag amber">TCPDUMP</span><span class="tag amber">Grafana</span>
-        <span class="tag amber">NetBox</span><span class="tag amber">Jira</span>
-        <span class="tag amber">xMatters</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--amber)"></div>
+          <span style="color:var(--amber)">Monitoring &amp; Tools</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-amber">Splunk Enterprise</span><span class="tag tag-amber">Wireshark</span>
+          <span class="tag tag-amber">TCPDUMP</span><span class="tag tag-amber">Grafana</span>
+          <span class="tag tag-amber">NetBox</span><span class="tag tag-amber">Jira</span>
+          <span class="tag tag-amber">xMatters</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x1F40D;</div>
-      <h4>Automation &amp; AI</h4>
-      <div class="tags">
-        <span class="tag purple">Python</span><span class="tag purple">Streamlit</span>
-        <span class="tag purple">netmiko</span><span class="tag purple">REST APIs</span>
-        <span class="tag purple">Claude / MCP</span><span class="tag purple">Jira API</span>
-        <span class="tag purple">NetBox API</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--purple)"></div>
+          <span style="color:var(--purple)">Automation &amp; AI</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-purple">Python</span><span class="tag tag-purple">Streamlit</span>
+          <span class="tag tag-purple">netmiko</span><span class="tag tag-purple">REST APIs</span>
+          <span class="tag tag-purple">Claude / MCP</span><span class="tag tag-purple">NetBox API</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-card">
-      <div class="skill-icon">&#x2601;&#xFE0F;</div>
-      <h4>Cloud</h4>
-      <div class="tags">
-        <span class="tag green">Microsoft Azure</span>
-        <span class="tag green">Google Cloud</span>
-        <span class="tag green">Azure Networking</span>
+      <div class="skill-card fade-up">
+        <div class="skill-cat">
+          <div class="skill-cat-dot" style="background:var(--green)"></div>
+          <span style="color:var(--green)">Cloud</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-green">Microsoft Azure</span>
+          <span class="tag tag-green">Google Cloud</span>
+          <span class="tag tag-green">Azure Networking</span>
+        </div>
       </div>
     </div>
   </div>
@@ -466,188 +674,225 @@
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <h2 class="section-label">Experience</h2>
-  <h3 class="section-title">Professional History</h3>
-  <div class="section-divider"></div>
+  <div class="container">
+    <div class="sec-kicker">Experience</div>
+    <h3 class="sec-title">Professional History</h3>
+    <div class="sec-line"></div>
 
-  <div class="exp-list fade-in">
+    <div class="exp-timeline">
 
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Network Engineer</div>
-          <div class="exp-company">Terralogic Software Solutions — Bangalore, India</div>
+      <div class="exp-item current fade-up">
+        <div class="exp-node"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Network Engineer</div>
+              <div class="exp-company">Terralogic Software Solutions — Bangalore, India</div>
+            </div>
+            <div class="exp-period">Feb 2023 – Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Leading a team of six engineers managing network configs and resolving BGP, OSPF, and underlay traffic issues across production environments.</li>
+            <li>Implemented and managed VXLAN overlays for large-scale, multi-tenant network segmentation across data centre environments.</li>
+            <li>Configured and optimized MP-BGP for EVPN routing and MAC-IP binding to establish scalable control-plane forwarding.</li>
+            <li>Designed and deployed EVPN solutions for Layer 2 and Layer 3 virtualization, enhancing network agility and resource utilization.</li>
+            <li>Configured Arista VRF instances and MLAG for high-availability, loop-free data centre topologies.</li>
+            <li>Deployed and maintained CGNAT solutions managing IPv4 address exhaustion at subscriber scale.</li>
+            <li>Monitored networks with Splunk Enterprise; managed IPsec tunnels, BGP, VDOMs, and traffic on FortiGate firewalls.</li>
+            <li>Engaged Vendor TAC (Cisco, Juniper, Arista) for critical platform issues, RMAs, bug escalations, and firmware advisories.</li>
+          </ul>
         </div>
-        <div class="exp-period">Feb 2023 – Present</div>
       </div>
-      <ul class="exp-bullets">
-        <li>Leading a team of six engineers managing network configurations and resolving BGP, OSPF, and underlay traffic issues across production environments.</li>
-        <li>Implemented and managed VXLAN overlays for large-scale, multi-tenant network segmentation across data centre environments.</li>
-        <li>Configured and optimized MP-BGP for EVPN routing and MAC-IP binding to establish scalable control-plane forwarding.</li>
-        <li>Designed and deployed EVPN solutions for Layer 2 and Layer 3 virtualization, enhancing network agility and resource utilization.</li>
-        <li>Configured Arista VRF instances and MLAG for high-availability, loop-free data centre topologies.</li>
-        <li>Deployed and maintained CGNAT solutions to manage IPv4 address exhaustion at subscriber scale.</li>
-        <li>Managed OOB network infrastructure including console terminal servers and PDUs for secure remote access.</li>
-        <li>Monitored networks with Splunk Enterprise; managed IPsec tunnels, BGP issues, VDOMs, and traffic on FortiGate firewalls.</li>
-        <li>Engaged Vendor TAC (Cisco, Juniper, Arista) for critical platform issues, RMAs, bug escalations, and firmware advisories.</li>
-        <li>Upgrading Juniper JunOS, Cisco IOS-XR, and Arista EOS devices per change management procedures.</li>
-      </ul>
-    </div>
 
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Network Engineer</div>
-          <div class="exp-company">Epsilon InfoTech WLL — Manama, Bahrain</div>
+      <div class="exp-item fade-up">
+        <div class="exp-node"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Network Engineer</div>
+              <div class="exp-company">Epsilon InfoTech WLL — Manama, Bahrain</div>
+            </div>
+            <div class="exp-period">Aug 2022 – Jan 2023</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Deployed 5 Checkpoint 1600 SMB appliances with HA clustering, Site-to-Site IPsec VPN, and SSL VPN for secure branch connectivity.</li>
+            <li>Designed IP architectures including VLAN segmentation, subnetting, and routing protocols for medium business environments.</li>
+            <li>Configured firewall security policies, packet filtering, and SSL encryption to enforce perimeter security compliance.</li>
+            <li>Performed network monitoring and log analysis to identify and resolve traffic anomalies and policy violations.</li>
+          </ul>
         </div>
-        <div class="exp-period">Aug 2022 – Jan 2023</div>
       </div>
-      <ul class="exp-bullets">
-        <li>Deployed 5 Checkpoint 1600 SMB appliances with HA clustering, configuring Site-to-Site IPsec VPN and SSL VPN for secure branch connectivity.</li>
-        <li>Designed IP network architectures including VLAN segmentation, subnetting, and routing protocols for medium business environments.</li>
-        <li>Configured firewall security policies, packet filtering, and SSL encryption to enforce perimeter security compliance.</li>
-        <li>Performed network monitoring and log analysis to identify and resolve traffic anomalies, connectivity faults, and policy violations.</li>
-        <li>Collaborated with helpdesk teams to troubleshoot escalated DNS, DHCP, and connectivity issues, minimizing MTTR.</li>
-      </ul>
-    </div>
 
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Network Analyst</div>
-          <div class="exp-company">FIS Global — Bangalore, India</div>
+      <div class="exp-item fade-up">
+        <div class="exp-node"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Network Analyst</div>
+              <div class="exp-company">FIS Global — Bangalore, India</div>
+            </div>
+            <div class="exp-period">Dec 2021 – Jul 2022</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Participated in DC-to-DR switchover (DRE), executing failover validation for a global financial corporation.</li>
+            <li>Provided L1/L2 network support across LAN/WAN, resolving routing and performance issues to maintain SLA compliance.</li>
+            <li>Managed FortiGate firewall policies, VDOM configurations, and security rule sets across the production environment.</li>
+            <li>Upgraded firmware on Cisco 800 series routers and FortiGate 60F gateways, remediating known vulnerabilities.</li>
+          </ul>
         </div>
-        <div class="exp-period">Dec 2021 – Jul 2022</div>
       </div>
-      <ul class="exp-bullets">
-        <li>Participated in DC-to-DR switchover (DRE activity), executing failover validation and connectivity checks for a global financial corporation.</li>
-        <li>Provided L1/L2 network support across LAN/WAN environments, resolving routing and performance issues to maintain SLA compliance.</li>
-        <li>Managed FortiGate firewall policies, VDOM configurations, and security rule sets across the production environment.</li>
-        <li>Upgraded firmware on Cisco 800 series routers and FortiGate 60F gateways, remediating known vulnerabilities.</li>
-        <li>Monitored network performance using log analysis and packet capture, proactively resolving firewall policy violations and routing faults.</li>
-      </ul>
-    </div>
 
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Network Administrator</div>
-          <div class="exp-company">Ahalia Group — Palakkad, Kerala</div>
+      <div class="exp-item fade-up">
+        <div class="exp-node"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Network Administrator</div>
+              <div class="exp-company">Ahalia Group — Palakkad, Kerala</div>
+            </div>
+            <div class="exp-period">Mar 2020 – Dec 2021</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Configured and monitored network parameters for high availability using FortiGate SD-WAN.</li>
+            <li>Designed system configuration, directed installation, and enforced network stability standards.</li>
+            <li>Provided end-user support for Windows and Linux machines, upgraded FortiGate gateways, and resolved hardware issues.</li>
+          </ul>
         </div>
-        <div class="exp-period">Mar 2020 – Dec 2021</div>
       </div>
-      <ul class="exp-bullets">
-        <li>Configured and monitored network parameters for high availability using FortiGate SD-WAN, ensuring uptime.</li>
-        <li>Designed system configuration, directed system installation, and enforced network stability standards.</li>
-        <li>Provided end-user support for Windows and Linux machines, upgraded FortiGate gateways, and resolved hardware issues.</li>
-      </ul>
-    </div>
 
+    </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <h2 class="section-label">Projects</h2>
-  <h3 class="section-title">Tools I've Built</h3>
-  <div class="section-divider"></div>
+  <div class="container">
+    <div class="sec-kicker">Projects</div>
+    <h3 class="sec-title">Tools I've Built</h3>
+    <div class="sec-line"></div>
 
-  <div class="projects-grid fade-in">
+    <div class="projects-grid">
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(59,130,246,.12);">&#x1F4CA;</div>
-      <h4>Frontline Operations Dashboard</h4>
-      <p>9-tab Streamlit dashboard aggregating team metrics from Jira, Confluence, xMatters, and Slack. Replaced hours of manual report-pulling for a 6-engineer ops team with live, automated visibility across upgrades, incidents, and KB articles.</p>
-      <div class="project-stack">
-        <span class="tag">Python</span><span class="tag">Streamlit</span>
-        <span class="tag">Jira API</span><span class="tag">Confluence API</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>frontline-dashboard</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">📊</div>
+          <h4>Frontline Operations Dashboard</h4>
+          <p>9-tab Streamlit dashboard aggregating team metrics from Jira, Confluence, xMatters, and Slack. Replaced hours of manual report-pulling for a 6-engineer ops team with live, automated visibility.</p>
+          <div class="project-stack">
+            <span class="tag tag-cyan">Python</span><span class="tag tag-cyan">Streamlit</span>
+            <span class="tag tag-cyan">Jira API</span><span class="tag tag-cyan">Confluence API</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(6,182,212,.12);">&#x1F517;</div>
-      <h4>NetBox SSH Launcher</h4>
-      <p>Streamlit app over the NetBox DCIM API with a filterable device table and per-row one-click SSH — opens iTerm2 via osascript. Cuts device connection time from ~30s of manual lookup to a single click across thousands of devices.</p>
-      <div class="project-stack">
-        <span class="tag">Python</span><span class="tag">Streamlit</span>
-        <span class="tag">NetBox API</span><span class="tag">osascript</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>netbox-ssh-launcher</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">🔗</div>
+          <h4>NetBox SSH Launcher</h4>
+          <p>Streamlit app over the NetBox DCIM API with filterable device table and per-row one-click SSH — opens iTerm2 via osascript. Cuts device connection time from ~30s of manual lookup to a single click.</p>
+          <div class="project-stack">
+            <span class="tag tag-cyan">Python</span><span class="tag tag-cyan">Streamlit</span>
+            <span class="tag tag-cyan">NetBox API</span><span class="tag tag-cyan">osascript</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(16,185,129,.12);">&#x1F6E1;&#xFE0F;</div>
-      <h4>Security Learning Tracker</h4>
-      <p>Multi-page Streamlit app tracking a 4-phase career-transition curriculum — 68 study topics, 48 labs, and 14 certifications. Includes phase progress bars, session journaling, and JSON persistence for long-term career tracking.</p>
-      <div class="project-stack">
-        <span class="tag green">Python</span><span class="tag green">Streamlit</span><span class="tag green">JSON</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>security-tracker</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">🛡️</div>
+          <h4>Security Learning Tracker</h4>
+          <p>Multi-page Streamlit app tracking a 4-phase career-transition curriculum — 68 topics, 48 labs, 14 certifications. Includes phase KPI bars, session journaling, and JSON persistence for long-term tracking.</p>
+          <div class="project-stack">
+            <span class="tag tag-green">Python</span><span class="tag tag-green">Streamlit</span><span class="tag tag-green">JSON</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(245,158,11,.12);">&#x1F527;</div>
-      <h4>Device Upgrade Audit Tool</h4>
-      <p>Automated SSH audit tool using netmiko — pulls device lists from an Excel tracker, SSHes into each non-upgraded device, reads the running software version, and compares against target versions, surfacing compliance drift instantly.</p>
-      <div class="project-stack">
-        <span class="tag">Python</span><span class="tag">Streamlit</span>
-        <span class="tag">netmiko</span><span class="tag">openpyxl</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>upgrade-audit</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">🔧</div>
+          <h4>Device Upgrade Audit Tool</h4>
+          <p>Automated SSH audit tool using netmiko — SSHes into non-upgraded devices, reads running software version, compares against wiki targets across Juniper JunOS, Cisco IOS-XR, and Arista EOS.</p>
+          <div class="project-stack">
+            <span class="tag tag-amber">Python</span><span class="tag tag-amber">netmiko</span>
+            <span class="tag tag-amber">Streamlit</span><span class="tag tag-amber">openpyxl</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(139,92,246,.12);">&#x1F9E0;</div>
-      <h4>Claude Hub — AI Daily Hub</h4>
-      <p>Personal Streamlit productivity hub with an AI-powered Q&amp;A log and daily task tracker. Captures notable engineering insights per session and persists them as searchable entries — a second brain for ops knowledge built with Claude MCP integrations.</p>
-      <div class="project-stack">
-        <span class="tag purple">Python</span><span class="tag purple">Streamlit</span>
-        <span class="tag purple">Claude API</span><span class="tag purple">MCP</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>claude-hub</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">🧠</div>
+          <h4>Claude Hub — AI Daily Hub</h4>
+          <p>Personal Streamlit productivity hub with AI-powered Q&amp;A logging and daily task tracking. Captures engineering insights per session via Claude MCP integrations — a second brain for ops knowledge.</p>
+          <div class="project-stack">
+            <span class="tag tag-purple">Python</span><span class="tag tag-purple">Streamlit</span>
+            <span class="tag tag-purple">Claude API</span><span class="tag tag-purple">MCP</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="project-card">
-      <div class="project-icon" style="background:rgba(239,68,68,.12);">&#x1F5A5;&#xFE0F;</div>
-      <h4>SSH Session Manager</h4>
-      <p>CLI fuzzy-finder launcher built around 7,300+ SecureCRT sessions. Parses the session directory, presents a searchable fzf interface, and fires SSH directly — turning a sprawling session library into a two-keystroke workflow.</p>
-      <div class="project-stack">
-        <span class="tag">Bash / zsh</span><span class="tag">fzf</span><span class="tag">SecureCRT</span>
+      <div class="project-card fade-up">
+        <div class="project-topbar">
+          <div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div>
+          <div class="project-path">~/projects/<span>ssh-session-mgr</span></div>
+        </div>
+        <div class="project-body">
+          <div class="project-icon">💻</div>
+          <h4>SSH Session Manager</h4>
+          <p>CLI fuzzy-finder launcher for 7,300+ SecureCRT sessions. Parses session directory structure, presents a searchable fzf interface, and fires SSH directly — a two-keystroke workflow for any device.</p>
+          <div class="project-stack">
+            <span class="tag tag-cyan">Bash / zsh</span><span class="tag tag-cyan">fzf</span><span class="tag tag-cyan">SecureCRT</span>
+          </div>
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
 <!-- CERTIFICATIONS -->
 <section id="certifications">
-  <h2 class="section-label">Certifications</h2>
-  <h3 class="section-title">Credentials</h3>
-  <div class="section-divider"></div>
-
-  <div class="certs-grid fade-in">
-    <div class="cert-card">
-      <div class="cert-badge">&#x1F7E0;</div>
-      <div>
-        <div class="cert-name">Fortinet NSE4</div>
-        <div class="cert-issuer">Fortinet Network Security Professional</div>
+  <div class="container">
+    <div class="sec-kicker">Certifications</div>
+    <h3 class="sec-title">Credentials</h3>
+    <div class="sec-line"></div>
+    <div class="certs-grid">
+      <div class="cert-card fade-up">
+        <div class="cert-badge">🟠</div>
+        <div><div class="cert-name">Fortinet NSE4</div><div class="cert-issuer">Fortinet Network Security Professional</div></div>
       </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">&#x1F535;</div>
-      <div>
-        <div class="cert-name">CCNA</div>
-        <div class="cert-issuer">Cisco Certified Network Associate</div>
+      <div class="cert-card fade-up">
+        <div class="cert-badge">🔵</div>
+        <div><div class="cert-name">CCNA</div><div class="cert-issuer">Cisco Certified Network Associate</div></div>
       </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">&#x1F535;</div>
-      <div>
-        <div class="cert-name">CCNP R&amp;S</div>
-        <div class="cert-issuer">Cisco Certified Network Professional</div>
+      <div class="cert-card fade-up">
+        <div class="cert-badge">🔵</div>
+        <div><div class="cert-name">CCNP R&amp;S</div><div class="cert-issuer">Cisco Certified Network Professional</div></div>
       </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">&#x1F535;</div>
-      <div>
-        <div class="cert-name">AZ-700</div>
-        <div class="cert-issuer">Microsoft Certified: Azure Network Engineer Associate</div>
+      <div class="cert-card fade-up">
+        <div class="cert-badge">🔷</div>
+        <div><div class="cert-name">AZ-700</div><div class="cert-issuer">Microsoft Azure Network Engineer Associate</div></div>
       </div>
     </div>
   </div>
@@ -655,25 +900,26 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <h2 class="section-label">Education</h2>
-  <h3 class="section-title">Academic Background</h3>
-  <div class="section-divider"></div>
-
-  <div class="edu-grid fade-in">
-    <div class="edu-card">
-      <div class="edu-icon">&#x1F393;</div>
-      <div>
-        <div class="edu-degree">Master of Computer Applications</div>
-        <div class="edu-school">Bharathiyar University</div>
-        <div class="edu-year">2020 – 2023</div>
+  <div class="container">
+    <div class="sec-kicker">Education</div>
+    <h3 class="sec-title">Academic Background</h3>
+    <div class="sec-line"></div>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">Master of Computer Applications</div>
+          <div class="edu-school">Bharathiyar University</div>
+          <div class="edu-year">2020 – 2023</div>
+        </div>
       </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">&#x1F4DA;</div>
-      <div>
-        <div class="edu-degree">BSc Information Technology</div>
-        <div class="edu-school">Bharathiyar University</div>
-        <div class="edu-year">2017 – 2020</div>
+      <div class="edu-card fade-up">
+        <div class="edu-icon">📚</div>
+        <div>
+          <div class="edu-degree">BSc Information Technology</div>
+          <div class="edu-school">Bharathiyar University</div>
+          <div class="edu-year">2017 – 2020</div>
+        </div>
       </div>
     </div>
   </div>
@@ -681,86 +927,188 @@
 
 <!-- JOURNEY -->
 <section id="journey">
-  <h2 class="section-label">Journey</h2>
-  <h3 class="section-title">Network → Security → Cloud Roadmap</h3>
-  <div class="section-divider"></div>
-  <p style="color:#94a3b8;margin-bottom:2.5rem;max-width:640px;" class="fade-in">
-    A deliberate, phased 18-month path — anchored to real production work at each step,
-    sequencing skills rather than parallelizing them.
-  </p>
-
-  <div class="journey-phases fade-in">
-    <div class="phase-card active">
-      <span class="phase-badge">Phase 1 · Active</span>
-      <h4>Deep Network Foundation</h4>
-      <ul>
-        <li>BGP deep-dive (hardest first)</li>
-        <li>VRF / L3VPN mastery</li>
-        <li>VXLAN + EVPN design</li>
-        <li>SR-MPLS</li>
-        <li>JNCIS-SP / JNCIS-DC</li>
-      </ul>
-    </div>
-    <div class="phase-card">
-      <span class="phase-badge">Phase 2 · Months 7–12</span>
-      <h4>Security Engineering</h4>
-      <ul>
-        <li>Network security engineering</li>
-        <li>Firewall policy &amp; segmentation</li>
-        <li>Security+ certification</li>
-        <li>AWS VPCs, TGW, hybrid</li>
-      </ul>
-    </div>
-    <div class="phase-card">
-      <span class="phase-badge">Phase 3 · Months 13–18</span>
-      <h4>Cloud + Integration</h4>
-      <ul>
-        <li>AWS Advanced Networking</li>
-        <li>Cloud security engineering</li>
-        <li>Network automation + Python</li>
-        <li>AI-assisted workflows</li>
-      </ul>
-    </div>
-    <div class="phase-card">
-      <span class="phase-badge done">Target — Early 2028</span>
-      <h4>Network + Security + Cloud</h4>
-      <ul>
-        <li>Holistic security posture</li>
-        <li>Cloud-native networking</li>
-        <li>Automation-first engineering</li>
-        <li>Senior Security Engineer role</li>
-      </ul>
+  <div class="container">
+    <div class="sec-kicker">Career Roadmap</div>
+    <h3 class="sec-title">Network → Security → Cloud</h3>
+    <div class="sec-line"></div>
+    <p style="color:var(--text2);max-width:600px;margin-bottom:2.5rem;font-size:.95rem;">
+      A deliberate, phased 18-month path — sequencing skills rather than parallelizing,
+      anchored to real production work at every step.
+    </p>
+    <div class="phase-cards">
+      <div class="phase-card active fade-up">
+        <span class="phase-pill pill-active">● Phase 1 · Active</span>
+        <h4>Deep Network Foundation</h4>
+        <ul>
+          <li>BGP deep-dive (hardest first)</li>
+          <li>VRF / L3VPN mastery</li>
+          <li>VXLAN + EVPN design</li>
+          <li>SR-MPLS</li>
+          <li>JNCIS-SP / JNCIS-DC</li>
+        </ul>
+      </div>
+      <div class="phase-card fade-up">
+        <span class="phase-pill pill-next">Phase 2 · Months 7–12</span>
+        <h4>Security Engineering</h4>
+        <ul>
+          <li>Network security eng.</li>
+          <li>Firewall policy &amp; segmentation</li>
+          <li>Security+ certification</li>
+          <li>AWS VPCs, TGW, hybrid</li>
+        </ul>
+      </div>
+      <div class="phase-card fade-up">
+        <span class="phase-pill pill-next">Phase 3 · Months 13–18</span>
+        <h4>Cloud + Integration</h4>
+        <ul>
+          <li>AWS Advanced Networking</li>
+          <li>Cloud security engineering</li>
+          <li>Network automation</li>
+          <li>AI-assisted workflows</li>
+        </ul>
+      </div>
+      <div class="phase-card fade-up">
+        <span class="phase-pill pill-done">✓ Target — Early 2028</span>
+        <h4>Net + Sec + Cloud Eng.</h4>
+        <ul>
+          <li>Holistic security posture</li>
+          <li>Cloud-native networking</li>
+          <li>Automation-first mindset</li>
+          <li>Senior Security Engineer</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <h2 class="section-label fade-in">Contact</h2>
-  <h3 class="section-title fade-in">Let's Connect</h3>
-  <div class="section-divider fade-in"></div>
-  <p style="color:#94a3b8;max-width:500px;margin:0 auto 1rem;" class="fade-in">
-    Open to conversations about network engineering, security engineering, cloud infrastructure,
-    and building better ops tooling. Based in Bangalore, India.
-  </p>
-  <div class="contact-links fade-in">
-    <a class="btn btn-primary" href="mailto:vnetsecengr@gmail.com">&#x2709;&#xFE0F; vnetsecengr@gmail.com</a>
-    <a class="btn btn-linkedin" href="https://linkedin.com/in/vishnu-v-a30842158" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="btn btn-outline" href="https://github.com/vishnuvjs" target="_blank" rel="noopener">GitHub</a>
+  <div class="container">
+    <div class="contact-inner">
+      <div class="sec-kicker">Contact</div>
+      <h3 class="sec-title">Let's Connect</h3>
+      <div class="sec-line"></div>
+      <p>Open to conversations about network engineering, security, cloud infrastructure, and building better ops tooling. Based in Bangalore — available globally.</p>
+      <div class="contact-links">
+        <a class="btn btn-li" href="https://linkedin.com/in/vishnu-v-a30842158" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-gh" href="https://github.com/vishnuvjs" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="contact-email">
+        ✉ <a href="mailto:vnetsecengr@gmail.com">vnetsecengr@gmail.com</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>Built by <span>Vishnu V</span> · Hosted on GitHub Pages · Bangalore, India</p>
+  <span>Vishnu V</span> · Network Engineer · Bangalore, India · Built with HTML/CSS/JS · Hosted on GitHub Pages
 </footer>
 
 <script>
+  /* ── CANVAS NETWORK ANIMATION ── */
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, nodes = [], animId;
+    const N = 55, CONN_DIST = 160;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function init() {
+      nodes = [];
+      for (let i = 0; i < N; i++) {
+        nodes.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - .5) * .35,
+          vy: (Math.random() - .5) * .35,
+          r: Math.random() * 2 + 1.5,
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < CONN_DIST) {
+            const alpha = (1 - d / CONN_DIST) * 0.35;
+            ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+            ctx.lineWidth = .7;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      // nodes
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,212,255,0.6)';
+        ctx.fill();
+        // glow
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,212,255,0.1)';
+        ctx.fill();
+      });
+    }
+
+    function update() {
+      nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      });
+    }
+
+    function loop() {
+      update(); draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', () => { resize(); init(); });
+    resize(); init(); loop();
+  })();
+
+  /* ── TYPING ANIMATION ── */
+  (function() {
+    const el = document.getElementById('typed-text');
+    const texts = ['whoami', 'show ip bgp summary', 'cat profile.json', 'ssh vishnu@network'];
+    let ti = 0, ci = 0, deleting = false, pause = 0;
+
+    function type() {
+      if (pause > 0) { pause--; setTimeout(type, 80); return; }
+      const cur = texts[ti];
+      if (!deleting) {
+        el.textContent = cur.slice(0, ++ci);
+        if (ci === cur.length) { deleting = true; pause = 25; }
+        setTimeout(type, 85);
+      } else {
+        el.textContent = cur.slice(0, --ci);
+        if (ci === 0) { deleting = false; ti = (ti + 1) % texts.length; pause = 8; }
+        setTimeout(type, 45);
+      }
+    }
+    setTimeout(type, 800);
+  })();
+
+  /* ── SCROLL FADE IN ── */
   const observer = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.1 }
+    { threshold: 0.08 }
   );
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
